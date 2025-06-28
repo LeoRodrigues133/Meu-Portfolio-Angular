@@ -1,0 +1,70 @@
+// Main styles
+.app-text-stack {
+    color: rgb(179, 179, 179);
+    font-size: 1.2rem;
+}
+
+.app-text-important {
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+}
+
+.app-text-subtittle {
+    color: rgb(255, 255, 255, 0.5);
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-shadow: black 0px 0px 2px;
+}
+
+.liquid-style {
+    object-fit: cover;
+    width: 350px;
+    height: 350px;
+    animation: liquid-effect 3s ease-in-out infinite alternate;
+    border: 2px solid rgba(44, 40, 40, 0.5);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+
+@media screen {
+    @media (max-width: 768px) {
+        .responsive {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-direction: column-reverse;
+        }
+
+        .responsive>:first-child {
+            position: relative;
+            top: auto;
+        }
+
+        .responsive>button {
+            margin-bottom: 1rem;
+            min-width: 90%;
+        }
+    }
+}
+
+
+// Liquid effect animation
+@keyframes liquid-effect {
+    0% {
+        border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%;
+        transform: translate(0, 0);
+    }
+
+    33% {
+        border-radius: 48% 52% 53% 47% / 46% 54% 46% 54%;
+    }
+
+    66% {
+        border-radius: 52% 48% 47% 53% / 54% 46% 54% 46%;
+    }
+
+    100% {
+        border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%;
+        transform: translate(0, 3%);
+    }
+}

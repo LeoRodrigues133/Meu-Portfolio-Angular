@@ -1,0 +1,44 @@
+<section id="Contact" class="py-5 bg-darker">
+    <div class="container">
+        <div class="row gy-4 justify-content-around text-center text-md-start">
+
+            <!-- Coluna 1 - Sobre -->
+            <div class="col-12 col-md-4">
+                <h5 class="fw-bold mb-3">Leonardo Rodrigues</h5>
+                <p class="text-muted">
+                    Desenvolvedor Backend .NET
+                </p>
+            </div>
+
+            <!-- Coluna 2 - Acesso Rápido -->
+            <div class="col-6 col-md-4 col-lg-3">
+                <h5 class="fw-bold mb-3">Acesso Rápido</h5>
+                <ul class="list-unstyled ">
+                    <li><a href="#Inicio" class="text-decoration-none d-block text-muted mb-2">Início</a></li>
+                    <li><a href="#About" class="text-decoration-none d-block text-muted mb-2">Sobre</a></li>
+                    <li><a href="#Skills" class="text-decoration-none d-block text-muted mb-2">Habilidades</a></li>
+                    <li><a href="#Stack" class="text-decoration-none d-block text-muted mb-2">Stack</a></li>
+                    <li><a href="#Portfolio" class="text-decoration-none d-block text-muted mb-2">Portfólio</a></li>
+                </ul>
+            </div>
+
+            <!-- Coluna 3 - Contato -->
+            <div class="col-6 col-md-4 col-lg-3 ">
+                <h5 class="fw-bold mb-3">Contato</h5>
+                <p class="mb-2">
+                    <a href="mailto:leokrodrigues@gmail.com" class="text-decoration-none text-muted">
+                        leokrodrigues&#64;gmail.com
+                    </a>
+                </p>
+                <div class="d-flex justify-content-center justify-content-md-start gap-3">
+
+                    <a *ngFor="let link of contactLinks" href="link.url" class="{{link.color}} fs-4 " target="_blank">
+                        <i class="bi {{link.icon}}"></i>
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

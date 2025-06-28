@@ -1,0 +1,27 @@
+<div 
+  class="modal-backdrop" 
+  *ngIf="isVisible"
+  (click)="closeModal()"
+>
+  <div class="modal-content bg-black" (click)="$event.stopPropagation()">
+    <h2>{{this.title}}</h2>
+
+    <textarea
+      [(ngModel)]="message"
+      rows="5"
+      placeholder="Digite o assunto..."
+    ></textarea>
+
+    <div class="modal-actions">
+      <button class="btn btn-mail-alone me-auto" (click)="sendMail()">
+        <i class="bi bi-envelope"></i> Email
+      </button>
+      
+      <button class="rounded-start-pill btn btn-secondary" (click)="closeModal()">Cancelar</button>
+      
+      <button class="rounded-end-pill btn btn-success" (click)="sendMessage()">
+        <i class="bi bi-whatsapp"></i> Enviar
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<section id="Portfolio" class="py-5">
+  <div class="container">
+    <h2 class="text-center fw-bold">Projetos</h2>
+
+    <hr class="w-25 mx-auto mb-5">
+
+    <div class="row mt-4">
+      <div class="col-md-4 mb-4">
+        <div *ngFor="let item of itemProjects" class="card h-100">
+          <img [src]="item.img" class="card-img-top" alt="Projeto 1">
+          <div class="card-body">
+            <h5 class="card-title">{{item.title}}</h5>
+            <p class="card-text">{{item.description}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

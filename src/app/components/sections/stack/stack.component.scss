@@ -1,0 +1,8 @@
+.stack-icon {
+    height: 60px;
+    transition: transform 0.3s ease;
+
+    &:hover {
+        transform: scale(1.2);
+    }
+}

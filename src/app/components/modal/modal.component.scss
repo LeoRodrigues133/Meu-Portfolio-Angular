@@ -1,0 +1,39 @@
+
+// Modal styles
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    width: 400px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.modal-content textarea {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+
+.btn-mail-alone{
+background-color: beige;
+color: black;
+border-left: 5px solid red;
+border-right: 5px solid red;
+}
