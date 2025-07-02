@@ -85,7 +85,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.development.ts"
+                  "with": "src/environments/environment.prod.ts"
                 }
               ]
             }
@@ -96,10 +96,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "Portfolio-Dev:build:production"
+              "buildTarget": "Meu-Portfolio-Angular:build:production"
             },
             "development": {
-              "buildTarget": "Portfolio-Dev:build:development"
+              "buildTarget": "Meu-Portfolio-Angular:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -110,8 +110,8 @@
         "deploy": {
           "builder": "angular-cli-ghpages:deploy",
           "options": {
-            "baseHref": "https://leorodrigues133.github.io/Portfolio-Dev/",
-            "repo":"https://github.com/leorodrigues133/Portfolio-Dev.git"
+            "baseHref": "https://leorodrigues133.github.io/Meu-Portfolio-Angular/",
+            "repo":"https://github.com/leorodrigues133/Meu-Portfolio-Angular.git"
           }
         }
       }
