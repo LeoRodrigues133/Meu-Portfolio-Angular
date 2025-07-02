@@ -1,4 +1,4 @@
 export const environment = {
     production: false,
-    API_URL: "http://localhost:7895/"
+    API_URL: "https://api-proxy-portfolio-dev.onrender.com/"
 };
