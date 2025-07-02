@@ -38,15 +38,5 @@ export class SkillComponent {
       title: 'Implantação',
       description: 'Implantação e manutenção de sistemas em servidores VPS e em nuvem.',
     },
-    {
-      icon: 'bi bi-building-gear',
-      title: 'Implantação',
-      description: 'Implantação e manutenção de sistemas em servidores VPS e em nuvem.',
-    },
-    {
-      icon: 'bi bi-building-gear',
-      title: 'Implantação',
-      description: 'Implantação e manutenção de sistemas em servidores VPS e em nuvem.',
-    },
   ];
 }
