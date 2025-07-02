@@ -28,7 +28,7 @@ export class PortfolioComponent implements OnInit {
                 if (exists) {
                   return this.gitService.getProject( repo.name).pipe(
                     map(fileData => {
-                      const json = this.decodeBase64(fileData.content);
+                      const json = this.decoder(fileData.content);
                       return {
                         title: json.title,
                         description: json.description,
@@ -36,13 +36,13 @@ export class PortfolioComponent implements OnInit {
                         gifUrl: json.gif
                       } as itemProject;
                     }),
-                    catchError(() => of(null)) // Em caso de erro no getProject
+                    catchError(() => of(null)) 
                   );
                 } else {
                   return of(null);
                 }
               }),
-              catchError(() => of(null)) // Em caso de erro no checkFileExist
+              catchError(() => of(null))
             )
           )
         )
@@ -53,7 +53,7 @@ export class PortfolioComponent implements OnInit {
     });
   }
 
-  private decodeBase64(content: string): any {
+  private decoder(content: string): any {
     const binaryString = window.atob(content);
     const bytes = Uint8Array.from(binaryString, char => char.charCodeAt(0));
     const decodedContent = new TextDecoder('utf-8').decode(bytes);
