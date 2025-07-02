@@ -10,6 +10,9 @@ import { ContactLink } from './models/contact-link';
   styleUrls: ['./contact.component.scss'],
 })
 export class ContactComponent {
+  phone:string = '49998076236';
+  message:string = 'Olá, eu gostaria de falar com você!'
+  
   public contactLinks: ContactLink[] = [
     {
       url: 'https://www.linkedin.com/in/leonardorodriguesdev/',

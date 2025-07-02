@@ -110,8 +110,8 @@
         "deploy": {
           "builder": "angular-cli-ghpages:deploy",
           "options": {
-            "baseHref": "https://kriegerl1.github.io/Portfolio-Dev/",
-            "repo":"https://github.com/Kriegerl1/Portfolio-Dev.git"
+            "baseHref": "https://leorodrigues133.github.io/Portfolio-Dev/",
+            "repo":"https://github.com/leorodrigues133/Portfolio-Dev.git"
           }
         }
       }

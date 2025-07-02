@@ -9,24 +9,33 @@ import { itemProject } from './models/item-portfolio';
 @Component({
   selector: 'app-portfolio',
   standalone: true,
-  imports: [NgFor,NgIf],
+  imports: [NgFor, NgIf],
   templateUrl: './portfolio.component.html',
   styleUrls: ['./portfolio.component.scss'],
 })
+
 export class PortfolioComponent implements OnInit {
   public projects: itemProject[] = [];
 
   constructor(private gitService: githubService) { }
-
   ngOnInit(): void {
+
+    if (this.projects.length > 0)
+      return;
+
+    else
+      this.CarregarProjetos()
+    
+  }
+  public CarregarProjetos(): void {
     this.gitService.getRepository().pipe(
       switchMap((repositories: any[]) =>
         forkJoin(
           repositories.map(repo =>
-            this.gitService.checkFileExist( repo.name).pipe(
+            this.gitService.checkFileExist(repo.name).pipe(
               switchMap(exists => {
                 if (exists) {
-                  return this.gitService.getProject( repo.name).pipe(
+                  return this.gitService.getProject(repo.name).pipe(
                     map(fileData => {
                       const json = this.decoder(fileData.content);
                       return {
@@ -36,7 +45,7 @@ export class PortfolioComponent implements OnInit {
                         gifUrl: json.gif
                       } as itemProject;
                     }),
-                    catchError(() => of(null)) 
+                    catchError(() => of(null))
                   );
                 } else {
                   return of(null);
@@ -60,3 +69,4 @@ export class PortfolioComponent implements OnInit {
     return JSON.parse(decodedContent);
   }
 }
+

@@ -1,8 +1,7 @@
 <section id="Contact" class="py-5 bg-darker">
     <div class="container">
-        <div class="row gy-4 justify-content-around text-center text-md-start">
+        <div class="row gy-4 justify-content-center justify-content-md-around text-center text-md-start">
 
-            <!-- Coluna 1 - Sobre -->
             <div class="col-12 col-md-4">
                 <h5 class="fw-bold mb-3">Leonardo Rodrigues</h5>
                 <p class="text-muted">
@@ -10,8 +9,7 @@
                 </p>
             </div>
 
-            <!-- Coluna 2 - Acesso Rápido -->
-            <div class="col-6 col-md-4 col-lg-3">
+            <div class="col-12 col-md-4 col-lg-3">
                 <h5 class="fw-bold mb-3">Acesso Rápido</h5>
                 <ul class="list-unstyled ">
                     <li><a href="#Home" class="text-decoration-none d-block text-muted mb-2">Início</a></li>
@@ -22,17 +20,23 @@
                 </ul>
             </div>
 
-            <!-- Coluna 3 - Contato -->
-            <div class="col-6 col-md-4 col-lg-3 ">
+
+            <div class="col-12 col-md-4 col-lg-3">
                 <h5 class="fw-bold mb-3">Contato</h5>
                 <p class="mb-2">
                     <a href="mailto:leokrodrigues@gmail.com" class="text-decoration-none text-muted">
-                        leokrodrigues&#64;gmail.com
+                        <i class="bi bi-envelope text-secondary p-2"></i>leokrodrigues133&#64;gmail.com
+                    </a>
+                </p>
+                <p class="mb-2">
+                    <a href="https://api.whatsapp.com/send?phone={{phone}}&text={{message}}"
+                        class="text-decoration-none text-muted">
+                        <i class="bi bi-whatsapp text-success p-2"></i>(49) 9 9807-6236
                     </a>
                 </p>
                 <div class="d-flex justify-content-center justify-content-md-start gap-3">
 
-                    <a *ngFor="let link of contactLinks" href="link.url" class="{{link.color}} fs-4 " target="_blank">
+                    <a *ngFor="let link of contactLinks" [href]="link.url" class="{{link.color}} fs-4 " target="_blank">
                         <i class="bi {{link.icon}}"></i>
                     </a>
 
