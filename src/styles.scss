@@ -1,3 +1,64 @@
 /* You can add global styles to this file, and also import other style files */
 @import "bootstrap";
 @import "bootstrap-icons";
+
+// icon colors
+.instagram {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 15%, #dc2743 40%, #cc2366 70%, #bc1888 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    height: 2.6rem;
+    width: 2.1rem;
+}
+
+.linkedin {
+    color: #0A66C2;
+}
+
+.github {
+    color: #b0b0b0;
+}
+
+// customized colors
+.bg-darker {
+    background-color: #1a1a1a;
+    color: #ffffff;
+}
+
+.bg-darker-plus {
+    background-color: #121212bf;
+    color: #ffffff;
+}
+
+
+// Liquid effect animation
+@keyframes liquid-effect {
+    0% {
+        border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%;
+    }
+
+    33% {
+        border-radius: 48% 52% 53% 47% / 46% 54% 46% 54%;
+    }
+
+    66% {
+        border-radius: 52% 48% 47% 53% / 54% 46% 54% 46%;
+    }
+
+    100% {
+        border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%;
+    }
+}
+
+// space effect animation
+@keyframes space-effect {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(0, 3%);
+    }
+}

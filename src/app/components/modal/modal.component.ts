@@ -36,7 +36,7 @@ export class ModalComponent {
   }
 
   sendMessage() {
-    const phone = '+554998076236'; // use localmente aqui
+    const phone = '+554998076236';
     let texto = '';
 
     if (this.message.trim() === '') {

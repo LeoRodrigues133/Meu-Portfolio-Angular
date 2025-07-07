@@ -37,6 +37,6 @@ export class SkillComponent {
       icon: 'bi bi-building-gear',
       title: 'Implantação',
       description: 'Implantação e manutenção de sistemas em servidores VPS e em nuvem.',
-    },
+    }
   ];
 }

@@ -25,15 +25,4 @@ export class githubService {
 
     return this.http.get<any>(getUrl);
   }
-
-  checkFileExist( repository: string) {
-
-    const getUrl = `${this.baseUrl}project/${repository}`;
-
-    return this.http.get<any[]>(getUrl).pipe(
-      map(
-        () => true),
-      catchError(() => of(true))
-    );
-  }
 }

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Portfolio-Dev": {
+    "Meu-Portfolio-Angular": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -41,7 +41,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/portfolio-dev",
+            "outputPath": "dist/Meu-Portfolio-Angular",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -85,7 +85,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "with": "src/environments/environment.development.ts"
                 }
               ]
             }

@@ -1,65 +1,120 @@
-import { NgFor, NgIf } from '@angular/common';
+import { forkJoin, Observable, of } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import { githubService } from './services/github.service';
-import { environment } from '../../../../environments/environment.development';
-import { forkJoin, of } from 'rxjs';
-import { catchError, filter, map, mergeMap, switchMap, toArray } from 'rxjs/operators';
 import { itemProject } from './models/item-portfolio';
+import { DatePipe, NgFor, NgIf } from '@angular/common';
+import { githubService } from './services/portfolio.service';
+import { catchError, map, switchMap, } from 'rxjs/operators';
 
 @Component({
   selector: 'app-portfolio',
   standalone: true,
-  imports: [NgFor, NgIf],
+  imports: [NgFor, NgIf, DatePipe],
   templateUrl: './portfolio.component.html',
   styleUrls: ['./portfolio.component.scss'],
 })
 
 export class PortfolioComponent implements OnInit {
-  public projects: itemProject[] = [];
+  public allProjects: itemProject[] = [];
+  public displayedProjects: itemProject[] = [];
+
+  public findedRepositories: number = 0;
+  public currentPage: number = 0;
+  public pageSize: number = 3;
+
 
   constructor(private gitService: githubService) { }
   ngOnInit(): void {
 
-    if (this.projects.length > 0)
+    if (this.allProjects.length > 0)
       return;
 
-    else
-      this.CarregarProjetos()
-    
+    else {
+      this.LoadConfiguredProjects()
+
+
+    }
   }
-  public CarregarProjetos(): void {
-    this.gitService.getRepository().pipe(
-      switchMap((repositories: any[]) =>
-        forkJoin(
-          repositories.map(repo =>
-            this.gitService.checkFileExist(repo.name).pipe(
-              switchMap(exists => {
-                if (exists) {
-                  return this.gitService.getProject(repo.name).pipe(
-                    map(fileData => {
-                      const json = this.decoder(fileData.content);
-                      return {
-                        title: json.title,
-                        description: json.description,
-                        gitUrl: repo.html_url,
-                        gifUrl: json.gif
-                      } as itemProject;
-                    }),
-                    catchError(() => of(null))
-                  );
-                } else {
-                  return of(null);
-                }
-              }),
-              catchError(() => of(null))
-            )
-          )
-        )
-      ),
-      map(results => results.filter(p => p !== null))
-    ).subscribe(projects => {
-      this.projects = projects;
-    });
+
+  public LoadMoreProjects(): void {
+    const start = this.currentPage * this.pageSize;
+    const end = start + this.pageSize;
+    const index = end > this.findedRepositories ? this.findedRepositories : end;
+    const nextProjects = this.allProjects.slice(start, index);
+
+    this.displayedProjects = [...this.displayedProjects, ...nextProjects];
+    // add in display more three projects, after the already displayed
+
+    this.currentPage++;
+  }
+
+  public LoadConfiguredProjects(): any {
+    this.gitService.getRepository()
+      .pipe(
+        switchMap((repositories: any[]) =>
+          forkJoin(repositories
+            .map(repository =>
+              this.CreateItemProject(repository)))
+          // calls the GitHub API to get all repositories.
+          // uses switchmap and forkjoin to proccess the repositories in parallel,
+          // then filter by configured or not.
+        ),
+
+        map(results =>
+          results.filter(p => p !== null))
+      ).subscribe(projects => {
+
+        projects.sort((a, b) => {
+          if (a.isConfigured === b.isConfigured) {
+            return b.lastestUpdate.getTime() - a.lastestUpdate.getTime();
+          }
+          return a.isConfigured ? -1 : 1;
+        });
+        // filters the projects first by configuration, then by lastest update.
+
+        this.allProjects = projects;
+
+        this.findedRepositories = this.allProjects.length;
+
+        this.LoadMoreProjects();
+
+      }), catchError(() => of(null));
+
+  }
+
+  private CreateItemProject(repository: any): Observable<itemProject | null> {
+    return this.gitService.getProject(repository.name).pipe(
+      map(fileData => {
+        const json = this.decoder(fileData.content)
+        const configuredProject = this.MapProjectFromJson(json, repository);
+        // If finded portfólio.json in repository, it maps the project, push it in the configuredPrjects array.
+
+        return configuredProject;
+      }),
+      catchError(() => of(this.MapProject(repository)))
+      // If json is not finded, it returns null, so before it's discarted, is pushed to unconfiguredProjects array.
+    );
+  }
+
+  private MapProjectFromJson(json: any, repository: any): itemProject {
+    return {
+      title: json.title,
+      description: json.description,
+      gitUrl: repository.html_url,
+      gifUrl: json.gif,
+      lastestUpdate: new Date(repository.updated_at),
+      isConfigured: true
+    }
+  }
+
+  private MapProject(repository: any): itemProject {
+    return {
+      title: repository.name,
+      description: repository.description,
+      gitUrl: repository.html_url,
+      gifUrl: undefined,
+      lastestUpdate: new Date(repository.updated_at),
+      isConfigured: false
+    }
   }
 
   private decoder(content: string): any {

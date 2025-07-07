@@ -71,18 +71,6 @@ export class StackComponent {
       icon: 'icons/ef-core.png',
       stack: 'Back-end'
     },
-    // {
-    //   name: 'MongoDB',
-    //   link: 'https://img.icons8.com/?size=100&id=74402&format=png&color=000000',
-    //   icon: '',
-    //   stack: 'Back-end'
-    // },
-    // {
-    //   name: 'PostgreSQL',
-    //   link: 'https://img.icons8.com/?size=100&id=38561&format=png&color=000000',
-    //   icon: '',
-    //   stack: 'Back-end'
-    // },
     {
       name: 'MySQL',
       link: 'https://img.icons8.com/?size=100&id=UFXRpPFebwa2&format=png&color=000000',

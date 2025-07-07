@@ -1,12 +1,9 @@
-.bg-darker {
-    background-color: #1a1a1a;
-    color: #ffffff;
-    padding: .5rem 0;
-}
+// Logo styles
 .logo {
     width: 5rem;
     height: auto;
     position: absolute;
     top: .5rem;
-    left: 2rem;
+    left: 3rem;
+    filter: drop-shadow(0 .1rem .2rem rgba(0, 0, 0, 0.8));
 }
