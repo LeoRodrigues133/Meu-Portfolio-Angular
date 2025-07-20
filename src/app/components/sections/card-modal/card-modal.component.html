@@ -1,0 +1,43 @@
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-fullscreen-sm-down modal-dialog-scrollable">
+    <div class="modal-content">
+
+      <div class="modal-header">
+
+        <h1 class="modal-title fs-2" id="exampleModalLabel">{{project?.title}}</h1>
+
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body d-flex justify-content-between flex-column">
+
+        <img *ngIf="project?.gifUrl" [src]="project?.gifUrl" class="img-fluid"
+          (click)="openImageFullscreen(project?.gifUrl!)" style="cursor: pointer;">
+
+        <p class="mt-3 lead fs-4">{{project?.description}}</p>
+
+        <p class="mt-3">Última atualização: {{ project?.lastestUpdate | date:'dd/MM/yyyy' }}
+        </p>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary rounded-pill app-button-on-mobile" hidden-md hidden-lg
+          data-bs-dismiss="modal">Fechar</button>
+        <a type="button" [href]="project?.gitUrl" target="_blank" class="btn btn-outline-secondary rounded-pill">Ver no
+          GitHub</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal em fullscreen  -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content bg-black">
+      <div class="modal-body d-flex justify-content-center align-items-center" (click)="closeImageFullscreen()">
+        <img  [src]="selectedImageUrl" class="img-fluid" >
+      </div>
+    </div>
+  </div>
+</div>

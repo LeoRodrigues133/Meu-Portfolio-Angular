@@ -1,0 +1,10 @@
+.shadow:hover {
+    scale: 1.02;
+    box-shadow: 6px 6px 20px  rgba(127, 127, 127, 0.5)!important;
+    -webkit-box-shadow: 6px 6px 20px  rgba(127, 127, 127, .5)!important;
+    -moz-box-shadow: 6px 6px 20px  rgba(127, 127, 127, .5)!important;
+    transition: all .4s;
+}
+.shadow{
+    transition: all 1s;
+}

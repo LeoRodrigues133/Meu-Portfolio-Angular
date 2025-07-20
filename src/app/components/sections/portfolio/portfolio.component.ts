@@ -1,14 +1,16 @@
+import { NgFor, NgIf } from '@angular/common';
 import { forkJoin, Observable, of } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { itemProject } from './models/item-portfolio';
-import { DatePipe, NgFor, NgIf } from '@angular/common';
+import { CardsComponent } from '../cards/cards.component';
 import { githubService } from './services/portfolio.service';
 import { catchError, map, switchMap, } from 'rxjs/operators';
+import { CardModalComponent } from '../card-modal/card-modal.component';
 
 @Component({
   selector: 'app-portfolio',
   standalone: true,
-  imports: [NgFor, NgIf, DatePipe],
+  imports: [NgFor, NgIf, CardsComponent, CardModalComponent],
   templateUrl: './portfolio.component.html',
   styleUrls: ['./portfolio.component.scss'],
 })
@@ -21,6 +23,7 @@ export class PortfolioComponent implements OnInit {
   public currentPage: number = 0;
   public pageSize: number = 3;
 
+  public selectedProject: itemProject | null = null;
 
   constructor(private gitService: githubService) { }
   ngOnInit(): void {
@@ -31,8 +34,11 @@ export class PortfolioComponent implements OnInit {
     else {
       this.LoadConfiguredProjects()
 
-
     }
+  }
+
+  public openProjectModal(project: itemProject) {
+    this.selectedProject = project;
   }
 
   public LoadMoreProjects(): void {
@@ -113,7 +119,7 @@ export class PortfolioComponent implements OnInit {
       gitUrl: repository.html_url,
       gifUrl: "https://raw.githubusercontent.com/LeoRodrigues133/Meu-Portfolio-Angular/refs/heads/master/public/assets/SemImagem.PNG",
       lastestUpdate: new Date(repository.updated_at),
-      isConfigured: false
+      isConfigured: false,
     }
   }
 
