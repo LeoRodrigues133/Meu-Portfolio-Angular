@@ -25,5 +25,4 @@ export class githubService {
 
     return this.http.get<any>(getUrl);
   }
-  
 }
