@@ -6,14 +6,6 @@
     display: none;
 }
 
-.app-footer {
-    position: relative;
-}
-
-.app-footer> :nth-child(1) {
-    position: absolute;
-    left: 0;
-}
 
 @media only screen and (max-width: 900px) {
     .modal-footer {
@@ -21,7 +13,7 @@
         flex-direction: column-reverse;
     }
 
-    .app-footer> :nth-child(1) {
+    .modal-footer> :nth-child(1) {
         position: relative;
     }
 
