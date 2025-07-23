@@ -1,5 +1,6 @@
 {
     "title": "Meu Portfólio em Angular",
     "description": "Portfólio desenvolvido em Angular e Typescript, também faz comunicação com a Api.github para aprensentação de projetos em tempo real. Utiliza um proxy para preteção de dados sensíveis.",
-    "gif": "https://raw.githubusercontent.com/LeoRodrigues133/Meu-Portfolio-Angular/refs/heads/master/public/apresentacao.gif"
+    "gif": "https://raw.githubusercontent.com/LeoRodrigues133/Meu-Portfolio-Angular/refs/heads/master/public/apresentacao.gif",
+    "lastCommit": "Atualizadas algumas informações, adicionado visualização de projetos em tela cheia e visualização de ultimo commit."
 }

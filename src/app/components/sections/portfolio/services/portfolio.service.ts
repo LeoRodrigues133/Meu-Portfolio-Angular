@@ -25,12 +25,5 @@ export class githubService {
 
     return this.http.get<any>(getUrl);
   }
-
-  getLastCommit(repoName: string): Observable<any> {
-  const url = `https://api.github.com/repos/leorodrigues133/${repoName}/commits`;
-  return this.http.get<any[]>(url).pipe(
-    map(commits => commits[0]), // pega o último commit (mais recente)
-    catchError(() => of(null))
-  );
-}
+  
 }

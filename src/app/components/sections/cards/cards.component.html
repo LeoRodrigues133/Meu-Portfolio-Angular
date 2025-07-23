@@ -6,9 +6,12 @@
 
     <div class="card-body d-flex flex-column">
         <h5 class="card-title fw-semibold">{{ project.title }}</h5>
-        <p class="card-text text-secondary small">{{ project.description || 'Sem descrição' }}</p>
+        <p class="card-text text-secondary small">{{ project.description }}</p>
     </div>
-    <span class="px-2">Última atualização: {{ project.lastestUpdate | date:'dd/MM/yyyy' }}</span>
+
+    <div class="px-2 mb-2 d-flex flex-column small text-secondary">
+        <span>Ultima atualização: {{project.lastestUpdate | date:'dd/MM/yyyy' }}</span>
+    </div>
 
     <div class="card-footer darker border-0">
         <a [href]="project.gitUrl" target="_blank" class="btn btn-outline-secondary w-100 rounded-pill">Ver no

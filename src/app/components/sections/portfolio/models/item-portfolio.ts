@@ -4,5 +4,6 @@ export interface itemProject {
     gitUrl: string;
     gifUrl?: string;
     lastestUpdate: Date;
+    lastCommit?: string;
     isConfigured: boolean;
 }

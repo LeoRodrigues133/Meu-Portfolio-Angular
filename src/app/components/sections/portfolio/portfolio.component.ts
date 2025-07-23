@@ -108,6 +108,7 @@ export class PortfolioComponent implements OnInit {
       gitUrl: repository.html_url,
       gifUrl: json.gif,
       lastestUpdate: new Date(repository.updated_at),
+      lastCommit: json.lastCommit || 'Nenhum commit encontrado', // Added to avoid a new request to the Api github, avoiding unnecessary calls.
       isConfigured: true
     }
   }
@@ -119,6 +120,7 @@ export class PortfolioComponent implements OnInit {
       gitUrl: repository.html_url,
       gifUrl: "https://raw.githubusercontent.com/LeoRodrigues133/Meu-Portfolio-Angular/refs/heads/master/public/assets/SemImagem.PNG",
       lastestUpdate: new Date(repository.updated_at),
+      lastCommit: 'Nenhum commit encontrado',
       isConfigured: false,
     }
   }
