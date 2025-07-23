@@ -6,12 +6,25 @@
     display: none;
 }
 
+.app-footer {
+    position: relative;
+}
+
+.app-footer> :nth-child(1) {
+    position: absolute;
+    left: 0;
+}
 
 @media only screen and (max-width: 900px) {
-    .modal-footer{
+    .modal-footer {
         display: flex;
-        justify-content: space-around;
+        flex-direction: column-reverse;
     }
+
+    .app-footer> :nth-child(1) {
+        position: relative;
+    }
+
 
     .app-button-on-mobile {
         display: block;
