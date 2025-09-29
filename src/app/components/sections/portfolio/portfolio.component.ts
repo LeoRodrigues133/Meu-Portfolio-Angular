@@ -26,14 +26,27 @@ export class PortfolioComponent implements OnInit {
   public selectedProject: itemProject | null = null;
 
   constructor(private gitService: githubService) { }
+
+
   ngOnInit(): void {
+    const projetosSalvos = this.lerDoLocalStorage('Portfólio | Leo Rodrigues');
 
-    if (this.allProjects.length > 0)
-      return;
+    if (projetosSalvos) {
+      this.allProjects = projetosSalvos.map((json: any) => ({
+        ...json
+      }));
+      this.findedRepositories = this.allProjects.length;
+      this.LoadMoreProjects();
 
-    else {
-      this.LoadConfiguredProjects()
 
+      if (!this.compararDados(projetosSalvos, this.allProjects)) {
+
+        console.log('Uma nova atualização de projeto detectada.');
+      }
+
+
+    } else {
+      this.LoadConfiguredProjects();
     }
   }
 
@@ -83,7 +96,10 @@ export class PortfolioComponent implements OnInit {
 
         this.LoadMoreProjects();
 
+        this.salvarNoLocalStorage('Portfólio | Leo Rodrigues', this.allProjects);
+
       }), catchError(() => of(null));
+
 
   }
 
@@ -131,5 +147,34 @@ export class PortfolioComponent implements OnInit {
     const decodedContent = new TextDecoder('utf-8').decode(bytes);
     return JSON.parse(decodedContent);
   }
-}
 
+  private salvarNoLocalStorage(chave: string, dados: any): void {
+    localStorage.setItem(chave, JSON.stringify(dados));
+  }
+
+  private lerDoLocalStorage(chave: string): any | null {
+    const dados = localStorage.getItem(chave);
+    return dados ? JSON.parse(dados) : null;
+  }
+
+  private compararDados(localstorage: itemProject[], requisicao: itemProject[]): boolean {
+    if (!localstorage || !requisicao) return false;
+    if (localstorage.length !== requisicao.length) return false;
+
+    for (let i = 0; i < localstorage.length; i++) {
+      const local = localstorage[i];
+      const repo = requisicao[i];
+
+      const localDate = new Date(local.lastestUpdate).getTime();
+      const repoDate = new Date(repo.lastestUpdate).getTime();
+
+      if (local.title !== repo.title || localDate !== repoDate) {
+        localStorage.clear();
+        this.salvarNoLocalStorage('Portfólio | Leo Rodrigues', repo);
+        return false;
+      }
+    }
+
+    return true;
+  }
+}
