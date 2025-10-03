@@ -17,6 +17,7 @@ import { CardModalComponent } from '../card-modal/card-modal.component';
 export class PortfolioComponent implements OnInit {
   public allProjects: itemProject[] = [];
   public displayedProjects: itemProject[] = [];
+  public savedProjects? = this.readFromLocalStorage('Portfolio | Leo Rodrigues');
 
   public foundRepositories: number = 0;
   public currentPage: number = 0;
@@ -24,16 +25,22 @@ export class PortfolioComponent implements OnInit {
 
   public selectedProject: itemProject | null = null;
 
-  constructor(private gitService: githubService) {}
+  constructor(private gitService: githubService) {
+    const minutes = (tempo: number): number => tempo * 60000;
+
+    setInterval(() => {
+      this.loadConfiguredProjects(this.savedProjects);
+      console.log('Buscando atualizações!')
+    }, minutes(10));
+  }
 
   ngOnInit(): void {
-    const savedProjects = this.readFromLocalStorage('Portfolio | Leo Rodrigues');
 
-    if (savedProjects) {
-      this.allProjects = savedProjects.map((json: any) => ({ ...json }));
+    if (this.savedProjects) {
+      this.allProjects = this.savedProjects.map((json: any) => ({ ...json }));
       this.foundRepositories = this.allProjects.length;
       this.loadMoreProjects();
-      this.loadConfiguredProjects(savedProjects);
+      this.loadConfiguredProjects(this.savedProjects);
     } else {
       this.loadConfiguredProjects();
     }
