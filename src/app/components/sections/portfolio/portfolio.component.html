@@ -10,7 +10,7 @@
         <h2 class="lead">Buscando projetos</h2>
       </div>
       <h6 class="mx-4" *ngIf="allProjects.length > 1">
-        Apresentados {{displayedProjects.length}} de {{findedRepositories}} projetos.</h6>
+        Apresentados {{displayedProjects.length}} de {{foundRepositories}} projetos.</h6>
 
       <div class="col-12 col-md-6 col-lg-4" *ngFor="let project of displayedProjects">
 
@@ -24,8 +24,8 @@
     </div>
 
     <div *ngIf="allProjects.length > 1" class="d-flex justify-content-center mt-5">
-      <button class="btn btn-outline-secondary" (click)="LoadMoreProjects()"
-        [disabled]="displayedProjects.length >= findedRepositories"> Carregar mais</button>
+      <button class="btn btn-outline-secondary" (click)="loadMoreProjects()"
+        [disabled]="displayedProjects.length >= foundRepositories"> Carregar mais</button>
     </div>
 
   </div>

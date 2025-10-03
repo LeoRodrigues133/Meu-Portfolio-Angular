@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { itemProject } from './models/item-portfolio';
 import { CardsComponent } from '../cards/cards.component';
 import { githubService } from './services/portfolio.service';
-import { catchError, map, switchMap, } from 'rxjs/operators';
+import { catchError, map, switchMap } from 'rxjs/operators';
 import { CardModalComponent } from '../card-modal/card-modal.component';
 
 @Component({
@@ -14,39 +14,28 @@ import { CardModalComponent } from '../card-modal/card-modal.component';
   templateUrl: './portfolio.component.html',
   styleUrls: ['./portfolio.component.scss'],
 })
-
 export class PortfolioComponent implements OnInit {
   public allProjects: itemProject[] = [];
   public displayedProjects: itemProject[] = [];
 
-  public findedRepositories: number = 0;
+  public foundRepositories: number = 0;
   public currentPage: number = 0;
   public pageSize: number = 3;
 
   public selectedProject: itemProject | null = null;
 
-  constructor(private gitService: githubService) { }
-
+  constructor(private gitService: githubService) {}
 
   ngOnInit(): void {
-    const projetosSalvos = this.lerDoLocalStorage('Portfólio | Leo Rodrigues');
+    const savedProjects = this.readFromLocalStorage('Portfolio | Leo Rodrigues');
 
-    if (projetosSalvos) {
-      this.allProjects = projetosSalvos.map((json: any) => ({
-        ...json
-      }));
-      this.findedRepositories = this.allProjects.length;
-      this.LoadMoreProjects();
-
-
-      if (!this.compararDados(projetosSalvos, this.allProjects)) {
-
-        console.log('Uma nova atualização de projeto detectada.');
-      }
-
-
+    if (savedProjects) {
+      this.allProjects = savedProjects.map((json: any) => ({ ...json }));
+      this.foundRepositories = this.allProjects.length;
+      this.loadMoreProjects();
+      this.loadConfiguredProjects(savedProjects);
     } else {
-      this.LoadConfiguredProjects();
+      this.loadConfiguredProjects();
     }
   }
 
@@ -54,123 +43,119 @@ export class PortfolioComponent implements OnInit {
     this.selectedProject = project;
   }
 
-  public LoadMoreProjects(): void {
+  public loadMoreProjects(): void {
     const start = this.currentPage * this.pageSize;
     const end = start + this.pageSize;
-    const index = end > this.findedRepositories ? this.findedRepositories : end;
+    const index = end > this.foundRepositories ? this.foundRepositories : end;
     const nextProjects = this.allProjects.slice(start, index);
 
     this.displayedProjects = [...this.displayedProjects, ...nextProjects];
-    // add in display more three projects, after the already displayed
-
     this.currentPage++;
   }
 
-  public LoadConfiguredProjects(): any {
-    this.gitService.getRepository()
+  public loadConfiguredProjects(cachedProjects?: itemProject[]): void {
+    this.gitService
+      .getRepository()
       .pipe(
         switchMap((repositories: any[]) =>
-          forkJoin(repositories
-            .map(repository =>
-              this.CreateItemProject(repository)))
-          // calls the GitHub API to get all repositories.
-          // uses switchmap and forkjoin to proccess the repositories in parallel,
-          // then filter by configured or not.
+          forkJoin(repositories.map((repository) => this.createItemProject(repository)))
         ),
-
-        map(results =>
-          results.filter(p => p !== null))
-      ).subscribe(projects => {
-
+        map((results) => results.filter((p) => p !== null)),
+        catchError(() => of([]))
+      )
+      .subscribe((projects: itemProject[]) => {
         projects.sort((a, b) => {
           if (a.isConfigured === b.isConfigured) {
             return b.lastestUpdate.getTime() - a.lastestUpdate.getTime();
           }
           return a.isConfigured ? -1 : 1;
         });
-        // filters the projects first by configuration, then by lastest update.
 
-        this.allProjects = projects;
+        if (!cachedProjects) {
+          this.allProjects = projects;
+          this.foundRepositories = projects.length;
+          this.loadMoreProjects();
+          this.saveInLocalStorage('Portfolio | Leo Rodrigues', this.allProjects);
+          return;
+        }
 
-        this.findedRepositories = this.allProjects.length;
-
-        this.LoadMoreProjects();
-
-        this.salvarNoLocalStorage('Portfólio | Leo Rodrigues', this.allProjects);
-
-      }), catchError(() => of(null));
-
-
+        if (!this.compareData(cachedProjects, projects)) {
+          this.allProjects = projects;
+          this.foundRepositories = projects.length;
+          this.displayedProjects = [];
+          this.currentPage = 0;
+          this.loadMoreProjects();
+          this.saveInLocalStorage('Portfolio | Leo Rodrigues', this.allProjects);
+        }
+      });
   }
 
-  private CreateItemProject(repository: any): Observable<itemProject | null> {
+  private createItemProject(repository: any): Observable<itemProject | null> {
     return this.gitService.getProject(repository.name).pipe(
-      map(fileData => {
-        const json = this.decoder(fileData.content)
-        const configuredProject = this.MapProjectFromJson(json, repository);
-        // If finded portfólio.json in repository, it maps the project, push it in the configuredPrjects array.
-
-        return configuredProject;
+      map((fileData) => {
+        const json = this.decode(fileData.content);
+        return this.mapProjectFromJson(json, repository);
       }),
-      catchError(() => of(this.MapProject(repository)))
-      // If json is not finded, it returns null, so before it's discarted, is pushed to unconfiguredProjects array.
+      catchError(() => of(this.mapProject(repository)))
     );
   }
 
-  private MapProjectFromJson(json: any, repository: any): itemProject {
+  private mapProjectFromJson(json: any, repository: any): itemProject {
     return {
       title: json.title,
       description: json.description,
       gitUrl: repository.html_url,
       gifUrl: json.gif,
       lastestUpdate: new Date(repository.updated_at),
-      lastCommit: json.lastCommit || 'Nenhum commit encontrado', // Added to avoid a new request to the Api github, avoiding unnecessary calls.
-      isConfigured: true
-    }
+      lastCommit: json.lastCommit || 'No commit found',
+      isConfigured: true,
+    };
   }
 
-  private MapProject(repository: any): itemProject {
+  private mapProject(repository: any): itemProject {
     return {
       title: repository.name,
       description: repository.description,
       gitUrl: repository.html_url,
-      gifUrl: "https://raw.githubusercontent.com/LeoRodrigues133/Meu-Portfolio-Angular/refs/heads/master/public/assets/SemImagem.PNG",
+      gifUrl:
+        'https://raw.githubusercontent.com/LeoRodrigues133/Meu-Portfolio-Angular/refs/heads/master/public/assets/SemImagem.PNG',
       lastestUpdate: new Date(repository.updated_at),
-      lastCommit: 'Nenhum commit encontrado',
+      lastCommit: 'No commit found',
       isConfigured: false,
-    }
+    };
   }
 
-  private decoder(content: string): any {
+  private decode(content: string): any {
     const binaryString = window.atob(content);
-    const bytes = Uint8Array.from(binaryString, char => char.charCodeAt(0));
+    const bytes = Uint8Array.from(binaryString, (char) => char.charCodeAt(0));
     const decodedContent = new TextDecoder('utf-8').decode(bytes);
     return JSON.parse(decodedContent);
   }
 
-  private salvarNoLocalStorage(chave: string, dados: any): void {
-    localStorage.setItem(chave, JSON.stringify(dados));
+  private saveInLocalStorage(key: string, data: any): void {
+    localStorage.setItem(key, JSON.stringify(data));
   }
 
-  private lerDoLocalStorage(chave: string): any | null {
-    const dados = localStorage.getItem(chave);
-    return dados ? JSON.parse(dados) : null;
+  private readFromLocalStorage(key: string): any | null {
+    const data = localStorage.getItem(key);
+    return data ? JSON.parse(data) : null;
   }
 
-  private compararDados(localstorage: itemProject[], requisicao: itemProject[]): boolean {
-    if (!localstorage || !requisicao) return false;
-    if (localstorage.length !== requisicao.length) return false;
+  private compareData(localstorage: itemProject[], request: itemProject[]): boolean {
+    if (!localstorage || !request) return false;
+    if (localstorage.length !== request.length) return false;
 
-    for (let i = 0; i < localstorage.length; i++) {
-      const local = localstorage[i];
-      const repo = requisicao[i];
+    const mapLocal = new Map(localstorage.map((p) => [p.title, p]));
+    const mapReq = new Map(request.map((p) => [p.title, p]));
+
+    for (let [title, repo] of mapReq) {
+      const local = mapLocal.get(title);
+      if (!local) return false;
 
       const localDate = new Date(local.lastestUpdate).getTime();
       const repoDate = new Date(repo.lastestUpdate).getTime();
 
-      if (local.title !== repo.title || localDate !== repoDate) {
-        localStorage.clear();
-        this.salvarNoLocalStorage('Portfólio | Leo Rodrigues', repo);
+      if (localDate !== repoDate || local.lastCommit !== repo.lastCommit) {
         return false;
       }
     }

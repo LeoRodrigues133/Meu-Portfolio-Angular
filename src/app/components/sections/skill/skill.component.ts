@@ -14,29 +14,54 @@ export class SkillComponent {
 
   public skills: ItemSkill[] = [
     {
-      icon: 'bi bi-window-fullscreen',
-      title: 'Web Design',
-      description: 'Design e desenvolvimento de sistemas web atraentes e responsivos.',
+      icon: 'bi bi-window',
+      title: 'Frontend com Angular',
+      description: 'Desenvolvimento de interfaces modernas e responsivas usando Angular, TypeScript e Bootstrap.',
     },
     {
-      icon: 'bi bi-server',
-      title: 'Aplicações Back-end',
-      description: 'Desenvolvimento de sistemas robustos para solucionar problemas simples ou complexos.',
+      icon: 'bi bi-cpu',
+      title: 'Backend com .NET',
+      description: 'Criação de APIs RESTful robustas e escaláveis com C# e ASP.NET Core.',
     },
     {
-      icon: 'bi bi-robot',
+      icon: 'bi bi-bezier2',
+      title: 'Arquitetura de Software',
+      description: 'Planejamento e construção de sistemas multi-camadas com separação de responsabilidades.',
+    },
+    {
+      icon: 'bi bi-diagram-3',
+      title: 'Integração de APIs',
+      description: 'Consumo e integração de serviços externos com tratamento eficiente de dados e erros.',
+    },
+    {
+      icon: 'bi bi-shield-check',
       title: 'Testes Automatizados',
-      description: 'Criação de testes automatizados que facilitam a manutenção e melhoram as entregas das aplicações.',
+      description: 'Escrita de testes unitários e de integração com NUnit e Selenium para garantir qualidade do código.',
     },
     {
-      icon: 'bi bi-wrench',
-      title: 'Engenharia de Software',
-      description: 'Planejamento e execução de sistemas multi-camadas, integrando várias tecnologias de forma organizada e escalável.',
+      icon: 'bi bi-git',
+      title: 'Git e GitHub',
+      description: 'Controle de versão com Git, uso de branches, PRs e revisão de código em ambientes colaborativos.',
     },
     {
-      icon: 'bi bi-building-gear',
-      title: 'Implantação',
-      description: 'Implantação e manutenção de sistemas em servidores VPS e em nuvem.',
+      icon: 'bi bi-cloud-upload',
+      title: 'Implantação e VPS',
+      description: 'Publicação e manutenção de sistemas em servidores VPS e ambientes de nuvem.',
+    },
+    {
+      icon: 'bi bi-journals',
+      title: 'Documentação Técnica',
+      description: 'Criação de documentação clara para funcionalidades, APIs e processos de desenvolvimento.',
+    },
+    {
+      icon: 'bi bi-people',
+      title: 'Trabalho em Equipe',
+      description: 'Participação em times ágeis com foco em colaboração, entregas frequentes e melhoria contínua.',
+    },
+    {
+      icon: 'bi bi-person-arms-up',
+      title: 'Apoio Técnico',
+      description: 'Acompanhamento de outros devs com revisão de código e suporte técnico em boas práticas.',
     }
   ];
 }
