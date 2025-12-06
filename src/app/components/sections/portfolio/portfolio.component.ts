@@ -125,7 +125,7 @@ export class PortfolioComponent implements OnInit {
       description: repository.description,
       gitUrl: repository.html_url,
       gifUrl:
-        'https://raw.githubusercontent.com/LeoRodrigues133/Meu-Portfolio-Angular/refs/heads/master/public/assets/SemImagem.jpg',
+        'https://raw.githubusercontent.com/LeoRodrigues133/Meu-Portfolio-Angular/refs/heads/master/public/assets/SemImagem.png',
       lastestUpdate: new Date(repository.updated_at),
       lastCommit: 'No commit found',
       isConfigured: false,
