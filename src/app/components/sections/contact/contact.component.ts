@@ -1,7 +1,7 @@
 import { NgFor, NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import emailjs from 'emailjs-com';
+import { contatoService } from './services/contato.service';
 
 interface ContactLink {
   url: string;
@@ -18,9 +18,11 @@ interface ContactLink {
   styleUrls: ['./contact.component.scss'],
 })
 export class ContactComponent {
+  private apiService = inject(contatoService);
+
   phone: string = '49998076236';
   message: string = 'Olá, eu gostaria de falar com você!';
-  
+
   emailForm = {
     name: '',
     email: '',
@@ -29,11 +31,11 @@ export class ContactComponent {
     subject: '',
     message: ''
   };
-  
+
   isSubmitted: boolean = false;
   submitStatus: 'idle' | 'loading' | 'success' | 'error' = 'idle';
   errorMessage: string = '';
-  
+
   public contactLinks: ContactLink[] = [
     {
       url: 'https://www.linkedin.com/in/leonardorodriguesdev/',
@@ -60,28 +62,28 @@ export class ContactComponent {
       this.errorMessage = 'Por favor, preencha seu nome';
       return false;
     }
-    
+
     if (!this.emailForm.email.trim()) {
       this.errorMessage = 'Por favor, preencha seu email';
       return false;
     }
-    
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(this.emailForm.email)) {
       this.errorMessage = 'Por favor, insira um email válido';
       return false;
     }
-    
+
     if (!this.emailForm.subject.trim()) {
       this.errorMessage = 'Por favor, preencha o assunto';
       return false;
     }
-    
+
     if (!this.emailForm.message.trim()) {
       this.errorMessage = 'Por favor, escreva sua mensagem';
       return false;
     }
-    
+
     return true;
   }
 
@@ -102,7 +104,7 @@ export class ContactComponent {
   onSubmitEmail(): void {
     this.isSubmitted = true;
     this.errorMessage = '';
-    
+
     if (!this.validateForm()) {
       this.submitStatus = 'error';
       setTimeout(() => {
@@ -110,39 +112,33 @@ export class ContactComponent {
       }, 3000);
       return;
     }
-    
+
     this.submitStatus = 'loading';
-    
-    const templateParams = {
-      from_name: this.emailForm.name,
-      from_email: this.emailForm.email,
-      phone: this.emailForm.phone || 'Não informado',
+
+    this.apiService.sendEmail({
+      name: this.emailForm.name,
+      email: this.emailForm.email,
+      phone: this.emailForm.phone,
       whatsapp: this.emailForm.isWhatsapp ? 'Sim' : 'Não',
       subject: this.emailForm.subject,
       message: this.emailForm.message
-    };
-    
-    emailjs.send(
-      'service_1s0ku4k',
-      'template_lh29x3d',
-      templateParams,
-      't3qcGzUFcWUD_ntcC'
-    )
-    .then(() => {
-      this.submitStatus = 'success';
-      
-      setTimeout(() => {
-        this.resetForm();
-      }, 3000);
-    })
-    .catch((error) => {
-      console.error('Erro ao enviar email:', error);
-      this.submitStatus = 'error';
-      this.errorMessage = 'Erro ao enviar mensagem. Tente novamente.';
-      
-      setTimeout(() => {
-        this.submitStatus = 'idle';
-      }, 3000);
+    }).subscribe({
+      next: (response) => {
+        this.submitStatus = 'success';
+
+        setTimeout(() => {
+          this.resetForm();
+        }, 3000);
+      },
+      error: (error) => {
+        console.error('Erro ao enviar email:', error);
+        this.submitStatus = 'error';
+        this.errorMessage = error.error?.error || 'Erro ao enviar mensagem. Tente novamente.';
+
+        setTimeout(() => {
+          this.submitStatus = 'idle';
+        }, 3000);
+      }
     });
   }
 }
