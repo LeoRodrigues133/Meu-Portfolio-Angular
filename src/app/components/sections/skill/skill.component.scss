@@ -1,0 +1,250 @@
+#Skills {
+    position: relative;
+    overflow: hidden; 
+}
+
+.app-parallax-bg {
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120%;          
+    object-fit: cover;
+    opacity: 0.35;
+    z-index: -1;         
+    filter: saturate(0.6) blur(2px);
+    transform: translateY(-10%);
+    transition: transform 0.2s linear;
+}
+
+// Título da seção
+.skills-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 3rem;
+
+    @media (max-width: 768px) {
+        font-size: 2.5rem;
+    }
+
+    @media (max-width: 576px) {
+        font-size: 2rem;
+    }
+}
+
+// Linha neon decorativa
+.neon {
+    width: 15%;
+    min-width: 100px;
+    max-width: 150px;
+    border: solid 2px #A68AF9;
+    opacity: 0.8;
+    border-radius: 12px;
+    margin: 0.5rem 0;
+    animation: neon-effect-2 .5s ease-in-out infinite alternate;
+    position: relative;
+
+    &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 3px;
+        width: 100%;
+        background: rgba(166, 138, 249, 0.9);
+        filter: blur(8px);
+    }
+}
+
+// Grid de habilidades
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem;
+
+    @media (max-width: 768px) {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1rem;
+    }
+
+    @media (max-width: 576px) {
+        grid-template-columns: 1fr;
+        padding: 0.5rem;
+    }
+}
+
+// Card de habilidade
+.skill-card {
+    min-height: 140px;
+    background: linear-gradient(135deg, rgba(24, 24, 27, 0.9) 0%, rgba(28, 28, 32, 0.95) 100%);
+    border: 1px solid #A68AF9;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    transition: all 0.3s ease;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(166, 138, 249, 0.1), transparent);
+        transition: left 0.5s ease;
+    }
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(166, 138, 249, 0.3);
+        border-color: #B89FFF;
+
+        &::before {
+            left: 100%;
+        }
+
+        .skill-icon {
+            transform: scale(1.1) rotate(5deg);
+            background: linear-gradient(135deg, #6527E2 0%, #A68AF9 100%);
+        }
+
+        .skill-title {
+            color: #B89FFF;
+        }
+    }
+
+    .skill-icon {
+        width: 70px;
+        height: 70px;
+        min-width: 70px;
+        background: linear-gradient(135deg, #37075F 0%, #6527E2 100%);
+        border-radius: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(101, 39, 226, 0.3);
+
+        i {
+            font-size: 32px;
+            color: #A68AF9;
+        }
+    }
+
+    .skill-content {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        flex: 1;
+
+        .skill-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #A68AF9;
+            margin: 0;
+            line-height: 1.3;
+            transition: color 0.3s ease;
+        }
+
+        .skill-description {
+            font-size: 0.95rem;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.75);
+            margin: 0;
+            line-height: 1.5;
+        }
+    }
+}
+
+// Animações de fade on scroll
+.fade-in-hidden {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+// Animação neon
+@keyframes neon-effect-2 {
+    from {
+        opacity: 0.6;
+        box-shadow: 0 0 10px rgba(166, 138, 249, 0.5);
+    }
+
+    to {
+        opacity: 1;
+        box-shadow: 0 0 20px rgba(166, 138, 249, 0.8);
+    }
+}
+
+// Responsivo para cards menores
+@media (max-width: 768px) {
+    .skill-card {
+        min-height: 120px;
+        padding: 1.25rem;
+
+        .skill-icon {
+            width: 60px;
+            height: 60px;
+            min-width: 60px;
+
+            i {
+                font-size: 28px;
+            }
+        }
+
+        .skill-content {
+            .skill-title {
+                font-size: 1.1rem;
+            }
+
+            .skill-description {
+                font-size: 0.9rem;
+            }
+        }
+    }
+}
+
+@media (max-width: 576px) {
+    #Skills {
+        min-height: auto;
+        padding: 3rem 0;
+    }
+
+    .skill-card {
+        min-height: 100px;
+        padding: 1rem;
+
+        .skill-icon {
+            width: 50px;
+            height: 50px;
+            min-width: 50px;
+
+            i {
+                font-size: 24px;
+            }
+        }
+
+        .skill-content {
+            .skill-title {
+                font-size: 1rem;
+            }
+
+            .skill-description {
+                font-size: 0.85rem;
+            }
+        }
+    }
+}

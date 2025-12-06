@@ -2,7 +2,9 @@
 
 <app-navbar></app-navbar>
 
-<app-about [openModal]="openModal.bind(this)"></app-about>
+<app-home (enviar)="ReceberTempo($event)"></app-home>
+
+<app-about [tempoDeEstudo]="tempoDeEstudo"></app-about>
 
 <app-skill></app-skill>
 

@@ -1,50 +1,71 @@
-// Main styles
-.app-text-stack {
-    color: rgb(179, 179, 179);
-    font-size: 1.2rem;
-}
+#About {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #212529;
+    box-shadow: 0px 1px 20px rgba(0, 0, 0, 0.6);
+    padding: 4rem 0;
 
-.app-text-important {
-    color: rgb(255, 255, 255);
-    font-weight: bold;
-}
-
-.app-text-subtittle {
-    color: rgb(255, 255, 255, 0.5);
-    font-weight: 600;
-    font-size: 1.1rem;
-    text-shadow: black 0px 0px 2px;
-}
-
-.space-liquid {
-    object-fit: cover;
-    width: 350px;
-    height: 350px;
-    animation: liquid-effect 3s ease-in-out infinite alternate,
-                space-effect 3s ease-in-out infinite alternate;
-    border: 2px solid rgba(44, 40, 40, 0.5);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
-
-
-
-@media screen {
     @media (max-width: 768px) {
-        .responsive {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            flex-direction: column-reverse;
-        }
+        min-height: auto;
+        padding: 3rem 0;
+    }
+}
 
-        .responsive>:first-child {
-            position: relative;
-            top: auto;
-        }
+.app-text-stack {
+    color: #A68AF9;
+    font-size: inherit;
+    font-weight: 600;
+}
 
-        .responsive>button {
-            margin-bottom: 1rem;
-            min-width: 90%;
-        }
+.plus {
+    font-size: 3.5rem !important;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 1rem;
+
+    @media (max-width: 768px) {
+        font-size: 2.5rem !important;
+    }
+
+    @media (max-width: 576px) {
+        font-size: 2rem !important;
+    }
+}
+
+.neon {
+    width: 15% !important;
+    min-width: 100px;
+    max-width: 150px;
+    border: solid 2px #A68AF9;
+    opacity: 0.8;
+    border-radius: 12px;
+    margin: 0.5rem 0;
+    animation: neon-effect-2 .4s ease-in-out infinite alternate;
+    position: relative;
+
+    &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 3px;
+        width: 100%;
+        background: rgba(166, 138, 249, 0.9);
+        filter: blur(8px);
+    }
+}
+
+
+.lead {
+    line-height: 1.8;
+    text-align: justify;
+    color: rgba(255, 255, 255, 0.9);
+
+    @media (max-width: 768px) {
+        font-size: 1rem !important;
+        text-align: left;
     }
 }

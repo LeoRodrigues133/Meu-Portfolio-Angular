@@ -1,16 +1,21 @@
-<section id="Skills" class="py-5">
-    <div class="container">
-        <h2 class="text-center fw-bold">Habilidades</h2>
-        <hr class="w-25 mx-auto mb-5">
+<section id="Skills">
+    <img src="assets/bg2.jpg" alt="Background" class="app-parallax-bg">
 
-        <div class="row row-cols-1 row-cols-lg-2 g-4">
-            <div *ngFor="let item of skills" class="col d-flex align-items-start gap-3">
-                <span>
-                    <i class="{{ item.icon }} fs-1"></i>
-                </span>
-                <div class="d-flex flex-column">
-                    <label class="fw-semibold fs-5">{{ item.title }}</label>
-                    <small class="lead text-muted fs-6">{{ item.description }}</small>
+    <div class="container">
+        <h2 class="text-center fw-bold mb-4 d-flex flex-column align-items-center skills-title">
+            Habilidades
+            <hr class="neon">
+        </h2>
+
+        <div class="skills-grid">
+            <div *ngFor="let skill of skills; let i = index" class="skill-card" data-aos="fade-left"
+                data-aos-duration="1000" data-aos-offset="50" [attr.data-aos-delay]="i * 100" data-aos-once="true">
+                <div class="skill-icon">
+                    <i [class]="skill.icon"></i>
+                </div>
+                <div class="skill-content">
+                    <h3 class="skill-title">{{ skill.title }}</h3>
+                    <p class="skill-description">{{ skill.description }}</p>
                 </div>
             </div>
         </div>

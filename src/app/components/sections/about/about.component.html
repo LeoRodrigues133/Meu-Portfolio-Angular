@@ -1,47 +1,67 @@
-<section id="About" class="py-5">
+<section id="About">
     <div class="container">
-        <div class="d-flex justify-content-around responsive">
-
-            <div class="d-flex flex-column justify-content-center align-items-start">
-
-
-                <h1 class="fs-3 mt-5 text-center">Olá, eu sou o <strong class="app-text-important text-nowrap">Leonardo
-                        Rodrigues</strong>.
-                    <br>
-                    <h2><strong class="app-text-subtittle">Desenvolvedor Fullstack</strong></h2>
-                </h1>
-
-                <div class="d-flex gap-3 mt-3 justify-content-center w-100 responsive">
-                    <button class="rounded-pill p-2 px-lg-5" (click)="openModal()">Contato</button>
-                    <button class="rounded-pill p-2 px-lg-5" (click)="downloadCV()">Baixar CV</button>
-                </div>
-
-            </div>
-
-            <img src="assets/portfolio3.jpg" alt="Imagem do Portfólio" class="img-fluid space-liquid">
-
-        </div>
-
-        <hr>
-
-        <div class="row flex-wrap mt-5">
+        <div class="row flex-wrap">
             <div class="col-lg">
-
-                <h2 class="text-center fw-bold">Sobre mim</h2>
-                <p class="lead mx-3 fs-5">
-                    Desenvolvedor Fullstack com mais de 1 ano de experiência prática em
-                    projetos acadêmicos e pessoais, utilizando a
-                    <span class="app-text-stack fw-semibold">plataforma .NET</span>
-                    com C#, ASP.NET Core e SQL Server.<br>
-                    Possuo também cerca de 1 ano de experiência com
-                    <span class="app-text-stack fw-semibold">Angular</span>,
-                    desenvolvendo interfaces web responsivas e integradas com APIs RESTful.
-                    Tenho conhecimento em arquitetura
-                    <span class="app-text-stack fw-semibold">MVC e DDD</span>,
-                    além de testes unitários e integração. Busco sempre criar soluções
-                    escaláveis e de qualidade para os projetos em que atuo.
+                <h2 class="text-center fw-bold mb-4 d-flex flex-column align-items-center fs-1 plus">
+                    Sobre mim
+                    <hr class="neon">
+                </h2>
+                <p class="lead fw-medium mx-3 fs-5" 
+                data-aos="fade-up" 
+                data-aos-duration="1000"
+                data-aos-delay="100"
+                data-aos-once="true"
+                >
+                    Sou desenvolvedor Fullstack formado em
+                    <span class="app-text-stack fw-semibold">Análise e Desenvolvimento de Sistemas</span>,
+                    com
+                    <span class="app-text-stack fw-semibold">{{ tempoDeEstudo }} de experiência</span>
+                    criando aplicações web. Passei pela
+                    <span class="app-text-stack fw-semibold">Academia do Programador</span>
+                    em Lages/SC, onde tive a oportunidade de trabalhar com
+                    <span class="app-text-stack fw-semibold">C#, .NET, Angular</span>,
+                    <span class="app-text-stack fw-semibold">SQL Server</span>
+                    e diversas outras ferramentas em projetos reais.
+                </p>
+                <p class="lead fw-medium mx-3 fs-5"
+                data-aos="fade-up" 
+                data-aos-offset="100" 
+                data-aos-duration="1000"
+                data-aos-delay="300"
+                data-aos-once="true"
+                >
+                    No back-end, me viro bem construindo APIs com
+                    <span class="app-text-stack fw-semibold">ASP.NET Core</span>
+                    e <span class="app-text-stack fw-semibold">Entity Framework</span>,
+                    sempre pensando em segurança e arquitetura. Tenho experiência com
+                    <span class="app-text-stack fw-semibold">DDD</span>,
+                    <span class="app-text-stack fw-semibold">CQRS</span>
+                    e sistemas multi-tenant.
                 </p>
 
+                <p class="lead fw-medium mx-3 fs-5" 
+                data-aos="fade-up" 
+                data-aos-offset="200" 
+                data-aos-duration="1000"
+                data-aos-delay="500"
+                data-aos-once="true"
+                >
+                    No front-end... bem, trabalho com <span class="app-text-stack fw-semibold">Angular</span>,
+                    <span class="app-text-stack fw-semibold">TypeScript</span>,
+                    <span class="app-text-stack fw-semibold">JavaScript</span>,
+                    um
+                    <span class="app-text-stack fw-semibold">React</span>
+                    se jogar no meu colo eu acho que consigo,
+                    <span class="app-text-stack fw-semibold">HTML</span> e
+                    <span class="app-text-stack fw-semibold">CSS</span>,
+                    eu me garanto! Ao menos para fazer as telinhas funcionarem...
+
+                    Mas confesso que não sou exatamente um designer de interfaces.
+                    Design não é meu forte, mas pelo menos sei centralizar uma div sem suar... muito!
+                </p>
 
             </div>
+
         </div>
+    </div>
+</section>

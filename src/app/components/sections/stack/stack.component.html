@@ -1,32 +1,72 @@
-<section id="Stack" class="py-5">
+<section id="Stack">
+    <!-- Background Parallax -->
     <div class="container">
-        <h2 class="text-center fw-bold mb-3">Minha Stack</h2>
-        <p class="lead text-center mb-4">
-            Tenho experiência em diversas tecnologias e ferramentas, incluindo:
-        </p>
-        <hr class="w-25 mx-auto mb-5">
+        <!-- Título -->
+        <h2 class="text-center fw-bold mb-3 d-flex flex-column align-items-center stack-title" data-aos="fade-down"
+            data-aos-delay="200" data-aos-once="true">
+            Minha Stack
+            <hr class="neon">
+        </h2>
 
-        <div class="row justify-content-center g-4 mb-5">
-            <div class="col-4 col-sm-3 col-md-2 text-center" *ngFor="let item of frontendStack">
-                <img [src]="item.icon === '' ? item.link : item.icon" [alt]="item.name"
-                    class="stack-icon img-fluid" />
-                <small class="d-block mt-2 text-muted">{{ item.name }}</small>
+        <!-- Frontend Stack -->
+        <div class="stack-category" data-aos="fade-up" data-aos-delay="300" data-aos-once="true">
+            <div class="category-header">
+                <i class="bi bi-palette-fill"></i>
+                <h3>Frontend</h3>
+            </div>
+            <div class="row justify-content-center g-3">
+                <div class="col-6 col-sm-4 col-md-3 col-lg-2" *ngFor="let item of frontendStack; let i = index"
+                    [attr.data-aos]="'fade-left'" [attr.data-aos-delay]="(i * 200)" data-aos-once="true">
+                    <div class="stack-card">
+                        <div class="stack-icon-wrapper">
+                            <img [src]="item.icon === '' ? item.link : item.icon" [alt]="item.name"
+                                class="stack-icon" />
+                        </div>
+                        <span class="stack-name">{{ item.name }}</span>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="row justify-content-center g-4 mb-5">
-            <div class="col-4 col-sm-3 col-md-2 text-center" *ngFor="let item of backendStack">
-                <img [src]="item.icon === '' ? item.link : item.icon" [alt]="item.name"
-                    class="stack-icon img-fluid" />
-                <small class="d-block mt-2 text-muted">{{ item.name }}</small>
+        <!-- Backend Stack -->
+        <div class="stack-category" data-aos="fade-up" data-aos-delay="400" data-aos-once="true">
+            <div class="category-header">
+                <i class="bi bi-server"></i>
+                <h3>Backend</h3>
+            </div>
+            <div class="row justify-content-center g-3">
+                <div class="col-6 col-sm-4 col-md-3 col-lg-2" *ngFor="let item of backendStack; let i = index"
+                    [attr.data-aos]="'fade-left'" [attr.data-aos-delay]="(i * 200)" data-aos-once="true">
+
+                    <div class="stack-card">
+                        <div class="stack-icon-wrapper">
+                            <img [src]="item.icon === '' ? item.link : item.icon" [alt]="item.name"
+                                class="stack-icon" />
+                        </div>
+                        <span class="stack-name">{{ item.name }}</span>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="row justify-content-center g-4">
-            <div class="col-4 col-sm-3 col-md-2 text-center" *ngFor="let item of otherStack">
-                <img [src]="item.icon === '' ? item.link : item.icon" [alt]="item.name"
-                    class="stack-icon img-fluid" />
-                <small class="d-block mt-2 text-muted">{{ item.name }}</small>
+        <!-- Other Tools -->
+        <div class="stack-category" data-aos="fade-up" data-aos-delay="500" data-aos-once="true">
+            <div class="category-header">
+                <i class="bi bi-tools"></i>
+                <h3>Ferramentas & Outros</h3>
+            </div>
+            <div class="row justify-content-center g-3">
+                <div class="col-6 col-sm-4 col-md-3 col-lg-2" *ngFor="let item of otherStack; let i = index"
+                    [attr.data-aos]="'fade-left'" [attr.data-aos-delay]="(i * 200)" data-aos-once="true">
+
+                    <div class="stack-card">
+                        <div class="stack-icon-wrapper">
+                            <img [src]="item.icon === '' ? item.link : item.icon" [alt]="item.name"
+                                class="stack-icon" />
+                        </div>
+                        <span class="stack-name">{{ item.name }}</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

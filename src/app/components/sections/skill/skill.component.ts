@@ -44,11 +44,6 @@ export class SkillComponent {
       description: 'Controle de versão com Git, uso de branches, PRs e revisão de código em ambientes colaborativos.',
     },
     {
-      icon: 'bi bi-cloud-upload',
-      title: 'Implantação e VPS',
-      description: 'Publicação e manutenção de sistemas em servidores VPS e ambientes de nuvem.',
-    },
-    {
       icon: 'bi bi-journals',
       title: 'Documentação Técnica',
       description: 'Criação de documentação clara para funcionalidades, APIs e processos de desenvolvimento.',

@@ -1,17 +1,19 @@
-<nav class="navbar navbar-expand-lg bg-darker">
-    <div class="container py-1">
-        <div class="navbar-brand d-flex align-items-center">
-            <img src="icons/Logo.ico" alt="Logo" class="navbar-brand logo">
-        </div>
-        <button (click)="isCollapsed = !isCollapsed" class="navbar-toggler" type="button" aria-expanded="false"
-            aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" [ngClass]="{'show': isCollapsed}">
-            <div class="navbar-nav ms-auto">
-                <a *ngFor="let item of navItems" class="nav-link" aria-current="page"
-                    href="{{item.route}}">{{item.label}}</a>
-            </div>
-        </div>
-    </div>
+<div class="logo-container">
+  <img src="icons/Logo.png" alt="Logo" class="logo">
+</div>
+
+<nav class="navbar-custom">
+  <div class="nav-content">
+    <a *ngFor="let item of navItems" 
+       [href]="item.route"
+       class="nav-item"
+       [class.active]="activeRoute === item.route"
+       (click)="setActive(item.route); $event.preventDefault()"
+       data-bs-toggle="tooltip"
+       data-bs-placement="left"
+       [attr.title]="item.label"
+       [attr.aria-label]="item.label">
+      <i [class]="item.icon"></i>
+    </a>
+  </div>
 </nav>

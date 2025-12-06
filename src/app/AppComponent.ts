@@ -1,5 +1,5 @@
 import { NgClass, NgForOf, NgIf } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './components/navbar/NavbarComponent';
@@ -10,6 +10,8 @@ import { ContactComponent } from './components/sections/contact/contact.componen
 import { FooterComponent } from './components/footer/footer.component';
 import { SkillComponent } from './components/sections/skill/skill.component';
 import { StackComponent } from './components/sections/stack/stack.component';
+import { HomeComponent } from "./components/sections/home/home.component";
+import AOS from 'aos'
 
 @Component({
   selector: 'app-root',
@@ -23,13 +25,23 @@ import { StackComponent } from './components/sections/stack/stack.component';
     StackComponent,
     NavbarComponent,
     ContactComponent,
-    PortfolioComponent
+    PortfolioComponent,
+    HomeComponent
   ],
   templateUrl: "app.component.html",
   styleUrls: ["app.component.scss"],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   isModalVisible: boolean = false;
+  tempoDeEstudo = '';
+
+  ngOnInit(): void {
+    AOS.init();
+  }
+
+  ReceberTempo(tempo: string) {
+    this.tempoDeEstudo = tempo;
+  }
 
 
   openModal() {

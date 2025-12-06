@@ -1,48 +1,176 @@
-<section id="Contact" class="py-5 bg-darker">
+<section id="Contact">
     <div class="container">
-        <div class="row gy-4 justify-content-center justify-content-md-around text-center text-md-start">
+        <!-- Título -->
+        <h2 class="text-center fw-bold mb-4 d-flex flex-column align-items-center contact-title" data-aos="fade-down"
+            data-aos-delay="200" data-aos-once="true">
+            Vamos Trabalhar Juntos?
+            <hr class="neon">
+        </h2>
 
-            <div class="col-12 col-md-4">
-                <h5 class="fw-bold mb-3">Leonardo Rodrigues</h5>
-                <p class="text-muted">
-                    Desenvolvedor Fullstack
-                </p>
-            </div>
+        <p class="contact-subtitle" data-aos="fade-up" data-aos-delay="400" data-aos-once="true">
+            Estou sempre aberto para novas oportunidades e projetos interessantes
+        </p>
 
-            <div class="col-12 col-md-4 col-lg-3">
-                <h5 class="fw-bold mb-3">Acesso Rápido</h5>
-                <ul class="list-unstyled ">
-                    <li><a href="#Home" class="text-decoration-none d-block text-muted mb-2">Início</a></li>
-                    <li><a href="#About" class="text-decoration-none d-block text-muted mb-2">Sobre</a></li>
-                    <li><a href="#Skills" class="text-decoration-none d-block text-muted mb-2">Habilidades</a></li>
-                    <li><a href="#Stack" class="text-decoration-none d-block text-muted mb-2">Stack</a></li>
-                    <li><a href="#Portfolio" class="text-decoration-none d-block text-muted mb-2">Portfólio</a></li>
-                </ul>
-            </div>
-
-
-            <div class="col-12 col-md-4 col-lg-3">
-                <h5 class="fw-bold mb-3">Contato</h5>
-                <p class="mb-2">
-                    <a href="mailto:leokrodrigues@gmail.com" class="text-decoration-none text-muted">
-                        <i class="bi bi-envelope text-secondary pe-2"></i>leokrodrigues133&#64;gmail.com
-                    </a>
-                </p>
-                <p class="mb-2">
-                    <a href="https://api.whatsapp.com/send?phone={{phone}}&text={{message}}"
-                        class="text-decoration-none text-muted">
-                        <i class="bi bi-whatsapp text-success pe-2"></i>(49) 9 9807-6236
-                    </a>
-                </p>
-                <div class="d-flex justify-content-center justify-content-md-start gap-3 ">
-
-                    <a *ngFor="let link of contactLinks" [href]="link.url" class="{{link.color}} fs-4 " target="_blank">
-                        <i class="bi {{link.icon}}"></i>
-                    </a>
-
+        <!-- Contact Cards -->
+        <div class="row g-4 mb-5">
+            <!-- Info Card -->
+            <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="500" data-aos-once="true">
+                <div class="contact-card">
+                    <div class="card-icon">
+                        <i class="bi bi-person-circle"></i>
+                    </div>
+                    <h5 class="card-title">Sobre</h5>
+                    <p class="card-text">Leonardo Rodrigues</p>
+                    <p class="card-subtitle">Desenvolvedor Fullstack</p>
                 </div>
             </div>
 
+            <!-- Email Card -->
+            <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="600" data-aos-once="true">
+                <a class="contact-card contact-card-clickable" href="#emailFormSection">
+                    <div class="card-icon">
+                        <i class="bi bi-envelope"></i>
+                    </div>
+                    <h5 class="card-title">Email</h5>
+                    <p class="card-text">Envie uma mensagem</p>
+                    <p class="card-subtitle">Respondo em breve</p>
+                </a>
+            </div>
+
+            <!-- WhatsApp Card -->
+            <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="700" data-aos-once="true">
+                <a [href]="'https://api.whatsapp.com/send?phone=' + phone + '&text=' + message" target="_blank"
+                    rel="noopener noreferrer" class="contact-card contact-card-link">
+                    <div class="card-icon">
+                        <i class="bi bi-whatsapp"></i>
+                    </div>
+                    <h5 class="card-title">WhatsApp</h5>
+                    <p class="card-text">(49) 9 9807-6236</p>
+                    <p class="card-subtitle">Respondo rápido</p>
+                </a>
+            </div>
+        </div>
+
+        <!-- Email Form Section -->
+        <div class="row g-4">
+            <div class="col-12 col-lg-8" data-aos="fade-up" data-aos-delay="800" data-aos-once="true">
+                <div id="emailFormSection" class="email-form-container">
+                    <h4 class="form-title">
+                        <i class="bi bi-envelope-check"></i>
+                        Enviar Mensagem
+                    </h4>
+
+                    <form (ngSubmit)="onSubmitEmail()" class="contact-form">
+                        <div class="row g-3">
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="name" class="form-label">Nome</label>
+                                    <input type="text" class="form-control" id="name" [(ngModel)]="emailForm.name"
+                                        name="name" placeholder="Seu nome completo" required>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" [(ngModel)]="emailForm.email"
+                                        name="email" placeholder="seu@email.com" required>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="phone" class="form-label">Telefone</label>
+                                    <input type="text" class="form-control" id="phone" maxlength="16"
+                                        [(ngModel)]="emailForm.phone" name="phone" placeholder="Telefone para contato"
+                                        required="false">
+
+                                    <div class="d-flex justify-content-between">
+                                        <small class="text-muted aviso">Não obrigatório</small>
+
+                                        <div class="form-check form-switch">
+                                            <input id="whatsapp" type="checkbox" [(ngModel)]="emailForm.isWhatsapp"
+                                                name="whatsapp" class="form-check-input" />
+                                            <label for="whatsapp" class="form-check-label">Whatsapp?</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="aviso" class="form-label">Aviso</label>
+                                    <p id="aviso">
+                                        O telefone não é obrigatório, caso seja preenchido
+                                        e assinalado o contato via Whatsapp, será tomado como contato prioritário.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="subject" class="form-label">Assunto</label>
+                                <input type="text" class="form-control" id="subject" [(ngModel)]="emailForm.subject"
+                                    name="subject" placeholder="Assunto da mensagem" required>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="message" class="form-label">Mensagem</label>
+                                <textarea class="form-control" id="message" [(ngModel)]="emailForm.message"
+                                    name="message" rows="5" placeholder="Escreva sua mensagem aqui..."
+                                    required></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Status Messages -->
+                        <div *ngIf="submitStatus === 'error'" class="alert alert-danger">
+                            <i class="bi bi-exclamation-circle"></i>
+                            <span>{{ errorMessage || 'Preencha todos os campos obrigatórios' }}</span>
+                        </div>
+
+                        <div *ngIf="submitStatus === 'success'" class="alert alert-success">
+                            <i class="bi bi-check-circle"></i>
+                            <span>Mensagem enviada com sucesso! Obrigado pelo contato.</span>
+                        </div>
+
+                        <button type="submit" class="btn-submit"
+                            [disabled]="submitStatus === 'loading' || submitStatus === 'success'">
+                            <span *ngIf="submitStatus === 'idle'">
+                                <i class="bi bi-send"></i>
+                                Enviar Mensagem
+                            </span>
+                            <span *ngIf="submitStatus === 'loading'">
+                                <span class="spinner-border spinner-border-sm"></span>
+                                Enviando...
+                            </span>
+                            <span *ngIf="submitStatus === 'success'">
+                                <i class="bi bi-check-lg"></i>
+                                Enviado!
+                            </span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Social Links -->
+            <div class="col-12 col-lg-4" data-aos="fade-up" data-aos-delay="900" data-aos-once="true">
+                <div class="social-section">
+                    <h5 class="section-title">
+                        <i class="bi bi-share-fill"></i>
+                        Redes Sociais
+                    </h5>
+                    <div class="social-links">
+                        <a *ngFor="let link of contactLinks" [href]="link.url" [title]="link.label"
+                            class="social-link {{link.color}}" target="_blank" rel="noopener noreferrer">
+                            <i class="bi {{link.icon}}"></i>
+                            <span class="social-label">{{ link.label }}</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>

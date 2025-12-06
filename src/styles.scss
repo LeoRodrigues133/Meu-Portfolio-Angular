@@ -3,15 +3,7 @@
 @import "bootstrap-icons";
 
 // icon colors
-.instagram {
-    background: linear-gradient(45deg, #f09433 0%, #e6683c 15%, #dc2743 40%, #cc2366 70%, #bc1888 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: transparent;
-    height: 2.6rem;
-    width: 2.1rem;
-}
+
 
 .linkedin {
     color: #0A66C2;
@@ -32,7 +24,6 @@
     color: #ffffff;
 }
 
-
 // Liquid effect animation
 @keyframes liquid-effect {
     0% {
@@ -52,13 +43,58 @@
     }
 }
 
-// space effect animation
+// Animações
+
 @keyframes space-effect {
-    0% {
-        transform: translate(0, 0);
+    from {
+        transform: translateY(0);
     }
 
-    100% {
-        transform: translate(0, 3%);
+    to {
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes neon-effect {
+    from {
+        filter: drop-shadow(0 0.65rem 0.2rem rgba(0, 128, 255, 0.8));
+    }
+
+    to {
+        filter: drop-shadow(0 0.65rem 0.5rem rgba(0, 200, 255, 1));
+    }
+}
+
+@keyframes neon-effect-2 {
+    from {
+        opacity: 0.6;
+        box-shadow: 0 0 10px rgba(166, 138, 249, 0.5);
+    }
+
+    to {
+        opacity: 1;
+        box-shadow: 0 0 20px rgba(166, 138, 249, 0.8);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
     }
 }

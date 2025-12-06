@@ -1,32 +1,94 @@
-<section id="Portfolio" class="py-5">
-  <div class="container">
-    <h2 class="text-center fw-bold mb-5">Projetos</h2>
-    <p class="lead text-center">Alguns projetos não dispõe de interface ou ainda estão recebendo ajustes.</p>
-    <div class="row g-4">
-
-      <div *ngIf="allProjects.length < 1" class="d-flex flex-column justify-content-center align-items-center">
-        <span class="spinner-border shadow my-5"></span>
-
-        <h2 class="lead">Buscando projetos</h2>
-      </div>
-      <h6 class="mx-4" *ngIf="allProjects.length > 1">
-        Apresentados {{displayedProjects.length}} de {{foundRepositories}} projetos.</h6>
-
-      <div class="col-12 col-md-6 col-lg-4" *ngFor="let project of displayedProjects">
-
-        <app-cards [project]="project" (openModal)="openProjectModal($event)"></app-cards>
+<section id="Portfolio">
+    <!-- Background Parallax -->
+    <img src="assets/bg3.jpg" alt="Background" class="app-parallax-bg">
+    
+    <div class="container">
+        <!-- Título -->
+                <h2 class="text-center fw-bold mb-4 d-flex flex-column align-items-center portfolio-title"
+                    data-aos="fade-down"
+                    data-aos-delay="200"
+                    data-aos-once="true">
+            Projetos
+            <hr class="neon">
+        </h2>
         
-      </div>
-      
-      <app-card-modal [project]="selectedProject"
-      (closeModal)="selectedProject = null"></app-card-modal>
+        <!-- Subtítulo -->
+        <p class="portfolio-subtitle"
+                    data-aos="fade-up"
+                    data-aos-delay="400"
+                    data-aos-once="true">
 
+            Todos os projetos apresentados foram configurados e processados pela própria api do github.
+            Se esta é sua primeira visita, pode haver um pequeno tempo de carregamento dos projetos.
+
+        </p>
+
+        <!-- Contador de projetos -->
+        <div class="portfolio-counter" 
+             *ngIf="allProjects.length > 1"
+                    data-aos="fade-up"
+                    data-aos-delay="500"
+                    data-aos-once="true">
+
+            <i class="bi bi-folder2-open"></i>
+            <span>Apresentados <strong>{{displayedProjects.length}}</strong> de <strong>{{foundRepositories}}</strong> projetos</span>
+        </div>
+
+        <!-- Loading State -->
+        <div *ngIf="allProjects.length < 1" 
+                    class="portfolio-loading"
+                    data-aos="fade-up"
+                    data-aos-delay="300"
+                    data-aos-once="true">
+
+            <div class="spinner-container">
+                <span class="spinner-border"></span>
+                <h3 class="loading-text">Buscando projetos...</h3>
+            </div>
+        </div>
+
+        <!-- Grid de Projetos -->
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 portfolio-grid">
+            <div class="col" 
+                 *ngFor="let project of displayedProjects; let i = index">
+                <app-cards 
+                    [project]="project" 
+                    (openModal)="openProjectModal($event)"
+                    [attr.data-aos]="'fade-up'"
+                    [attr.data-aos-delay]="(i * 200)">
+                </app-cards>
+            </div>
+        </div>
+
+        <!-- Botão Carregar Mais -->
+        <div *ngIf="allProjects.length > 1 && displayedProjects.length < foundRepositories" 
+                    class="portfolio-load-more"
+                    data-aos="fade-up"
+                    data-aos-delay="300"data-aos-easing="ease-in-sine"     data-aos-anchor-placement="bottom-bottom"
+                    data-aos-anchor-placement="top-bottom">
+                    
+            <button class="btn-load-more" 
+                    (click)="loadMoreProjects()"
+                    [disabled]="displayedProjects.length >= foundRepositories">
+                <i class="bi bi-arrow-down-circle"></i>
+                <span>Carregar mais projetos</span>
+            </button>
+        </div>
+
+        <!-- Mensagem quando todos projetos estão carregados -->
+        <div *ngIf="displayedProjects.length >= foundRepositories && allProjects.length > 1"
+                    class="portfolio-end-message"
+                    data-aos="fade-up"
+                    data-aos-once="true">
+                    
+            <i class="bi bi-check-circle-fill"></i>
+            <span>Todos os projetos foram carregados</span>
+        </div>
     </div>
 
-    <div *ngIf="allProjects.length > 1" class="d-flex justify-content-center mt-5">
-      <button class="btn btn-outline-secondary" (click)="loadMoreProjects()"
-        [disabled]="displayedProjects.length >= foundRepositories"> Carregar mais</button>
-    </div>
-
-  </div>
+    <!-- Modal -->
+    <app-card-modal 
+        [project]="selectedProject"
+        (closeModal)="selectedProject = null">
+    </app-card-modal>
 </section>
