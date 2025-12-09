@@ -86,8 +86,23 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
           customClass: 'tooltip-fade'
         })
       );
+
+      this.tooltipList.forEach(tooltip => {
+        if (tooltip)
+          tooltip.show();
+      });
     }
+
+    let time = 2000;
+    this.tooltipList.forEach((tooltip, index) => {
+      setTimeout(() => {
+        if (tooltip) {
+          tooltip.hide();
+        }
+      }, time + (index * 200));
+    });
   }
+
 
   private disposeTooltips(): void {
     this.tooltipList.forEach(tooltip => {
@@ -100,14 +115,14 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   setActive(route: string): void {
     this.activeRoute = route;
-    
+
     const targetId = route.substring(1);
     const targetElement = document.getElementById(targetId);
-    
+
     if (targetElement) {
-      targetElement.scrollIntoView({ 
-        behavior: 'smooth', 
-        block: 'start' 
+      targetElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
       });
     }
   }
