@@ -10,9 +10,9 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 export class HomeComponent implements OnInit {
   readonly socialLinks = {
     github: 'https://github.com/leorodrigues133',
-    linkedin: 'https://www.linkedin.com/in/leonardorodriguesdev',
-    email: 'mailto:leokrodrigues133@gmail.com'
+    linkedin: 'https://www.linkedin.com/in/leonardorodriguesdev'
   };
+  
 @Output() enviar = new EventEmitter<string>();
 
   private readonly startStudyTime: Date = new Date(Date.UTC(2024, 2, 11));

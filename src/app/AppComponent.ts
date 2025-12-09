@@ -1,5 +1,5 @@
 import { NgClass, NgForOf, NgIf } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './components/navbar/NavbarComponent';
@@ -31,12 +31,19 @@ import AOS from 'aos'
   templateUrl: "app.component.html",
   styleUrls: ["app.component.scss"],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit{
   isModalVisible: boolean = false;
   tempoDeEstudo = '';
 
   ngOnInit(): void {
     AOS.init();
+  }
+
+    ngAfterViewInit(): void {
+    setTimeout(() => {
+      AOS.refresh();
+    }, 100);
+
   }
 
   ReceberTempo(tempo: string) {
