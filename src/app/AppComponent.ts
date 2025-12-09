@@ -31,7 +31,7 @@ import AOS from 'aos'
   templateUrl: "app.component.html",
   styleUrls: ["app.component.scss"],
 })
-export class AppComponent implements OnInit, AfterViewInit{
+export class AppComponent implements OnInit, AfterViewInit {
   isModalVisible: boolean = false;
   tempoDeEstudo = '';
 
@@ -39,11 +39,14 @@ export class AppComponent implements OnInit, AfterViewInit{
     AOS.init();
   }
 
-    ngAfterViewInit(): void {
+  ngAfterViewInit(): void {
     setTimeout(() => {
       AOS.refresh();
     }, 100);
 
+    window.addEventListener('load', () => {
+      AOS.refresh();
+    });
   }
 
   ReceberTempo(tempo: string) {
