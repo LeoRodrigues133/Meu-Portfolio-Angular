@@ -31,21 +31,17 @@ import AOS from 'aos'
   templateUrl: "app.component.html",
   styleUrls: ["app.component.scss"],
 })
-export class AppComponent implements OnInit, AfterViewInit {
+export class AppComponent implements OnInit {
   isModalVisible: boolean = false;
   tempoDeEstudo = '';
 
   ngOnInit(): void {
-    AOS.init();
-  }
-
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      AOS.refresh();
-    }, 100);
-
     window.addEventListener('load', () => {
-      AOS.refresh();
+      setTimeout(() => {
+        AOS.init({
+          disable: false
+        });
+      }, 2000);
     });
   }
 
