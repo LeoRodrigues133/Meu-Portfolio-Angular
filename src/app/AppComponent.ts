@@ -36,9 +36,12 @@ export class AppComponent implements OnInit {
   tempoDeEstudo = '';
 
   ngOnInit(): void {
+
+
     window.addEventListener('load', () => {
       setTimeout(() => {
         AOS.init({
+          delay: 1000,
           disable: false
         });
       }, 2000);

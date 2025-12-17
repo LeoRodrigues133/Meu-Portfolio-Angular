@@ -22,7 +22,7 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
     { label: 'Sobre', icon: 'bi bi-person', route: '#About' },
     { label: 'Habilidades', icon: 'bi bi-flask-florence', route: '#Skills' },
     { label: 'Stack', icon: 'bi bi-stack', route: '#Stack' },
-    { label: 'Projetos', icon: 'bi bi-hexagon-half', route: '#Portfolio' },
+    { label: 'Projetos', icon: 'bi bi-pc-display-horizontal', route: '#Portfolio' },
     { label: 'Contato', icon: 'bi bi-envelope', route: '#Contact' }
   ];
 
@@ -99,7 +99,7 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
         if (tooltip) {
           tooltip.hide();
         }
-      }, time + (index * 200));
+      }, time + (index * 100));
     });
   }
 

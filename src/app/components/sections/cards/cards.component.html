@@ -1,38 +1,34 @@
-<div 
-    class="card border-0 rounded-3 project-card"
-    data-aos="fade-up"
-    data-aos-duration="600">
-    
+<div class="card border-0 rounded-3 project-card" data-aos="fade-up" data-aos-duration="600">
+
     <!-- IMAGEM COM OVERLAY -->
     <div class="card-img-wrapper">
-        <img 
-            [src]="project.gifUrl" 
-            class="card-img-top" 
-            [alt]="'Preview do projeto ' + project.title">
-        
+        <img [src]="project.gifUrl" class="card-img-top" [alt]="'Preview do projeto ' + project.title">
+
         <!-- Overlay hover -->
-        <div class="project-overlay"
-             (click)="onClickCard()"
-             data-bs-toggle="modal" 
-             data-bs-target="#exampleModal">
+        <div class="project-overlay" (click)="onClickCard()" data-bs-toggle="modal" data-bs-target="#exampleModal">
             <div class="overlay-content">
                 <span class="overlay-title">{{ project.title }}</span>
                 <p class="overlay-description">{{ project.description }}</p>
-                
+
                 <!-- Botão GitHub no overlay -->
-                <a 
-                    [href]="project.gitUrl" 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="btn-github-overlay"
-                    (click)="$event.stopPropagation()">
-                    <i class="bi bi-github"></i>
-                    <span>Ver no GitHub</span>
-                </a>
+
+                    <a [href]="project.gitUrl" target="_blank" rel="noopener noreferrer" class="btn-github-overlay"
+                        (click)="$event.stopPropagation()">
+                        <i class="bi bi-github"></i>
+                        <span>Ver no GitHub</span>
+                    </a>
+
+                    <a [href]="project.isDeployed" target="_blank"
+                    *ngIf="project.isDeployed"
+                    rel="noopener noreferrer" class="btn-github-overlay"
+                        (click)="$event.stopPropagation()">
+                        <i class="bi bi-diagram-3-fill"></i>
+                        <span>Deploy</span>
+                    </a>
             </div>
         </div>
     </div>
-    
+
     <!-- FOOTER COMPACTO -->
     <div class="card-footer-compact">
         <h5 class="card-title">{{ project.title }}</h5>

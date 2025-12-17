@@ -1,11 +1,11 @@
-import { DatePipe } from '@angular/common';
+import { DatePipe, NgIf } from '@angular/common';
 import { itemProject } from '../portfolio/models/item-portfolio';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-cards',
   standalone: true,
-  imports: [DatePipe],
+  imports: [DatePipe, NgIf],
   templateUrl: './cards.component.html',
   styleUrls: ['./cards.component.scss'],
 })

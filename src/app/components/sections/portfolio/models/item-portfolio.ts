@@ -6,4 +6,5 @@ export interface itemProject {
     lastestUpdate: Date;
     lastCommit?: string;
     isConfigured: boolean;
+    isDeployed?: string | null;
 }

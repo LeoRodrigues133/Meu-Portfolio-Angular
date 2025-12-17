@@ -156,6 +156,8 @@ html {
 
   .navbar-custom {
     position: fixed;
+    padding: 0rem;
+
     top: 0;
     left: 0;
     right: 0;
@@ -165,7 +167,6 @@ html {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     flex-direction: row;
     gap: 0;
-    padding: 0.75rem 1rem;
     align-items: center;
 
     .nav-content {
@@ -177,7 +178,8 @@ html {
       border: none;
       border-bottom: solid 1px #A68AF9;
       width: 100%;
-      padding: 0;
+      padding: .5rem;
+      animation: none ;
       padding-left: 5rem;
     }
 
@@ -192,11 +194,14 @@ html {
 
 @media (max-width: 576px) {
   .navbar-custom {
-    padding: 0.5rem;
+    padding: 0rem;
 
     .nav-content {
       gap: 0.25rem;
+      padding: 0.5rem;
       padding-left: 4.5rem;
+      animation: none;
+
     }
 
     .nav-item {

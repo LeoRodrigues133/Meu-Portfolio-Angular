@@ -108,6 +108,8 @@ export class PortfolioComponent implements OnInit {
   }
 
   private mapProjectFromJson(json: any, repository: any): itemProject {
+    console.log(json.isDeployed)
+
     return {
       title: json.title,
       description: json.description,
@@ -116,6 +118,7 @@ export class PortfolioComponent implements OnInit {
       lastestUpdate: new Date(repository.updated_at),
       lastCommit: json.lastCommit || 'No commit found',
       isConfigured: true,
+      isDeployed: json.isDeployed
     };
   }
 
@@ -129,6 +132,8 @@ export class PortfolioComponent implements OnInit {
       lastestUpdate: new Date(repository.updated_at),
       lastCommit: 'No commit found',
       isConfigured: false,
+      isDeployed: null
+
     };
   }
 
