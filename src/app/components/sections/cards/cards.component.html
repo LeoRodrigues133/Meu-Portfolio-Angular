@@ -12,13 +12,17 @@
 
                 <!-- Botão GitHub no overlay -->
 
-                    <a [href]="project.gitUrl" target="_blank" rel="noopener noreferrer" class="btn-github-overlay"
+                    <a [href]="project.gitUrl" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    class="btn-github-overlay"
                         (click)="$event.stopPropagation()">
                         <i class="bi bi-github"></i>
                         <span>Ver no GitHub</span>
                     </a>
 
-                    <a [href]="project?.isDeployed" target="_blank"
+                    <a [href]="project?.isDeployed" 
+                    target="_blank"
                     *ngIf="project?.isDeployed"
                     rel="noopener noreferrer" class="btn-github-overlay"
                         (click)="$event.stopPropagation()">
