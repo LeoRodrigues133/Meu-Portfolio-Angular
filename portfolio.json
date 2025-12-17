@@ -3,5 +3,5 @@
     "description": "Portfólio desenvolvido em Angular e Typescript, também faz comunicação com a Api.github para aprensentação de projetos em tempo real. Utiliza um proxy para preteção de dados sensíveis.",
     "gif": "https://raw.githubusercontent.com/LeoRodrigues133/Meu-Portfolio-Angular/refs/heads/master/public/apresentacao.gif",
     "lastCommit": "Atualização de desempenho no carregamento de projetos.",
-    "isDeployed": "https://barberclub-partial.vercel.app/"
+    "isDeployed": "https://leorodrigues133.github.io/Meu-Portfolio-Angular/"
 }
