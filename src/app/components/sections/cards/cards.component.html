@@ -23,7 +23,7 @@
 
                     <a [href]="project.isDeployed" 
                     target="_blank"
-                    *ngIf="project.isDeployed"
+                    *ngIf="project?.isDeployed"
                     rel="noopener noreferrer" class="btn-github-overlay"
                         (click)="$event.stopPropagation()">
                         <i class="bi bi-diagram-3-fill"></i>
